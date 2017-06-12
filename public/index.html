@@ -7,10 +7,14 @@
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 </head>
 
-<body>
+<body ng-controller="LoginController">
     <div class="container">
-        <h2>{{ 3 + 5 }}</h2>
-        <form ng-submit="login($event)" ng-controller="LoginController">
+    		<a href="#" ng-click="getData()">Get Secret Data</a>
+    		<div ng-show="message" class="alert alert-success" role="alert">
+    			<p>{{ message }}</p>
+    		</div>
+
+        <form ng-submit="login($event)" >
          		<h1>Login</h1>
             <div class="form-group">
                 <label for="username">Email address</label>
@@ -24,29 +28,13 @@
         </form>
     </div>
     <script src="bower_components/angular/angular.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-    	angular.module("mainApp", [])
-    		.controller('LoginController', function($scope, AuthService) {
-
-    			$scope.login = function( event ) {
-    				event.preventDefault()
-    				const { username, password } = $scope
-    				AuthService.login( username, password )
-    					.then( console.log )
-    			}
-
-    		})
-    		.factory('AuthService', function($http) {
-
-    			function login(username, password) {
-    				return $http.post('/login', { username, password })
-    					.then( response => response.data )
-    			}
-
-    			return { login }
-    		})
-
-    </script>
+    <script src="js/app.js" type="text/javascript"></script>
+    <script src="js/services/AuthService.js" type="text/javascript"></script>
+    <script src="js/services/StorageService.js" type="text/javascript"></script>
+    <script src="js/services/AuthInterceptor.js" type="text/javascript"></script>
+    <script src="js/services/DataService.js" type="text/javascript"></script>
+    <script src="js/controllers/LoginController.js" type="text/javascript"></script>
+    <script src="js/config.js" type="text/javascript"></script>
 </body>
 
 </html>
