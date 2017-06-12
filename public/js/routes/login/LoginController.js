@@ -9,6 +9,15 @@ angular.module('mainApp')
 					.catch(console.log)
 	  }
 
+	  $scope.register = function (event) {
+	    event.preventDefault()
+	    const { registerUsername: username, registerPassword: password } = $scope
+
+	    AuthService.register(username, password)
+					.then(console.log)
+					.catch(console.log)
+	  }
+
 	  $scope.getData = function () {
 	    DataService.getSecretData()
 					.then(data => $scope.message = data.msg)

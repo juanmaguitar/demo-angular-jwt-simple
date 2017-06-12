@@ -6,6 +6,8 @@ const dotenv = require('dotenv')
 const jwt = require('jsonwebtoken') // to generate tokens
 const expressJwt = require('express-jwt') // to verify tokens
 
+const authRoutes = require('./routes/auth')
+
 const PORT = process.env.PORT || 3000
 const app = express()
 
@@ -46,5 +48,6 @@ function authenticate (req, res, next) {
   next()
 }
 
-app.listen(PORT)
-console.log(`🔥 On fire on PORT ${PORT}`)
+app.use(authRoutes)
+
+module.exports = app
