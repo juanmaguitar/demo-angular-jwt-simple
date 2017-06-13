@@ -13,12 +13,17 @@
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#!/login">Login</a></li>
-				<li><a href="#!/register">Register</a></li>
-				<li><a href="#!/profile">Profile</a></li>
+				<li ng-hide="loggedUser"><a href="#!/login">Login</a></li>
+				<li ng-hide="loggedUser"><a href="#!/register">Register</a></li>
+				<li ng-show="loggedUser" class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Logged as {{ loggedUser }} <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#!/logout">Logout</a></li>
+            <li role="separator" class="divider"></li>
+						<li><a href="#!/profile">Profile</a></li>
+          </ul>
+        </li>
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->

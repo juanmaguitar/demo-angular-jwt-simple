@@ -1,11 +1,12 @@
 angular.module('mainApp')
-	.factory('AuthService', function ($http, StorageService) {
+	.factory('AuthService', function ($http, $rootScope, StorageService, jwtHelper) {
 
 		function login (username, password) {
 	    return $http.post('/login', { username, password })
 					.then(response => response.data)
 					.then(data => {
 						  StorageService.setToken(data.token)
+						  setCredentials(data.token)
 						  return data
 						})
 	  }
@@ -21,6 +22,15 @@ angular.module('mainApp')
        	return true
     }
 
+		function logout() {
+			StorageService.removeToken()
+			delete $rootScope.loggedUser
+		}
 
-  	return { login, register, isLoggedIn }
+		function setCredentials( token ) {
+			var tokenPayload = jwtHelper.decodeToken( token )
+      $rootScope.loggedUser = tokenPayload.username;
+		}
+
+  	return { login, register, isLoggedIn, logout, setCredentials}
 	})

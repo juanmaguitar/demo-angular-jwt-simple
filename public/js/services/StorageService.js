@@ -10,5 +10,9 @@ angular.module('mainApp')
 	    $window.localStorage.setItem(key, token)
 	  }
 
-  return { setToken, getToken }
+		function removeToken() {
+      return $window.localStorage.removeItem(key)
+    }
+
+  return { setToken, getToken, removeToken }
 })

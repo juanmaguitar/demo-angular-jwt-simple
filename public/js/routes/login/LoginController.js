@@ -1,20 +1,15 @@
 angular.module('mainApp')
-	.controller('LoginController', function ($scope, AuthService, DataService) {
+	.controller('LoginController', function ($scope, $location, AuthService, DataService) {
+
 	  $scope.login = function (event) {
 	    event.preventDefault()
 	    const { username, password } = $scope
 
 	    AuthService.login(username, password)
-					.then(console.log)
-					.catch(console.log)
-	  }
-
-	  $scope.register = function (event) {
-	    event.preventDefault()
-	    const { registerUsername: username, registerPassword: password } = $scope
-
-	    AuthService.register(username, password)
-					.then(console.log)
+					.then(msg => {
+						console.log(msg)
+						$location.path('/profile')
+					})
 					.catch(console.log)
 	  }
 

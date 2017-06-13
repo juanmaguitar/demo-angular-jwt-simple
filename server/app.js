@@ -3,12 +3,10 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const dotenv = require('dotenv')
 
-const jwt = require('jsonwebtoken') // to generate tokens
-const expressJwt = require('express-jwt') // to verify tokens
-
 const passport = require('./config/passport')
 
 const authRoutes = require('./routes/auth')
+const privateRoutes = require('./routes/private')
 
 const PORT = process.env.PORT || 3000
 const app = express()
@@ -21,11 +19,8 @@ app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, '../public')))
 app.use(passport.initialize())
 
-app.get('/data', (req, res) => {
-  const msg = 'super secret data'
-  res.json({msg})
-})
-
 app.use(authRoutes)
+app.use(privateRoutes)
+
 
 module.exports = app
