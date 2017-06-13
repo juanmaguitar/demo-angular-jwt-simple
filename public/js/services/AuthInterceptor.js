@@ -4,7 +4,7 @@ angular.module('mainApp')
     const token = StorageService.getToken()
     if (token) {
       config.headers = config.headers || {}
-      config.headers.Authorization = 'Bearer ' + token
+      config.headers.Authorization = 'JWT ' + token
     }
     return config
   }

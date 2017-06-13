@@ -3,7 +3,7 @@ angular.module('mainApp')
 
 			if ( AuthService.isLoggedIn() ) {
 				const token = StorageService.getToken()
-				//AuthService.setCredentials(token)
+				AuthService.setCredentials(token)
 			}
 
 			$rootScope.$on( "$routeChangeStart", function(event, next, current) {
